@@ -3,8 +3,8 @@ import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ProductsContainer from './containers/ProductsContainer';
-import Cart from './components/Cart';
-import Message from './components/Message';
+import CartContainer from './containers/CartContainer';
+import MessageContainer from './containers/MessageContainer';
 
 class App extends Component {
     render() {
@@ -14,8 +14,8 @@ class App extends Component {
                 <main id="mainContainer">
                     <div className="container">
                         <ProductsContainer />
-                        <Message />
-                        <Cart />
+                        <MessageContainer />
+                        <CartContainer />
                     </div>
                 </main>
                 <Footer />

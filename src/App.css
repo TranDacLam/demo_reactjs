@@ -53,11 +53,9 @@
 .rating li {
     display: inline;
 }
-.rating li .fa-star {
-    color: #f7be0e;
-}
 .rating li i{
     font-size: 18px;
+    color: #f7be0e;
 }
 
 footer{

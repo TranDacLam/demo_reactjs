@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as msg from './../constants/Message';
 
 class Product extends Component {
 
@@ -14,27 +15,30 @@ class Product extends Component {
         return result;
     }
 
+    onAddToCard = (product) => {
+        this.props.onAddToCard(product);
+        this.props.onChangeMessage(msg.MSG_ADD_TO_CART_SUCCESS);
+    }
+
     render() {
         var { product } = this.props;
         return (
             <div className="col-md-4">
                 <div className="thumbnail">
-                    <a href="#" target="_blank">
-                        <img src={product.image} alt={product.name} />
-                        <div className="caption">
-                            <h3>{product.name}</h3>
-                            <ul className="rating">
-                                { this.showRatings(product.rating)}
-                            </ul>
-                            <p>{product.des}</p>
-                            <h4>Price: {product.price}$</h4>
-                            <p>
-                                <button className="btn btn-primary">
-                                    <i className="fa fa-shopping-cart"></i> Add to cart
-                                </button>
-                            </p>
-                        </div>
-                    </a>
+                    <img src={product.image} alt={product.name} />
+                    <div className="caption">
+                        <h3>{product.name}</h3>
+                        <ul className="rating">
+                            { this.showRatings(product.rating)}
+                        </ul>
+                        <p>{product.des}</p>
+                        <h4>Price: {product.price}$</h4>
+                        <p>
+                            <a className="btn btn-primary" onClick={ () => this.onAddToCard(product)}>
+                                <i className="fa fa-shopping-cart"></i> Add to cart
+                            </a>
+                        </p>
+                    </div>
                 </div>
             </div>
         );
