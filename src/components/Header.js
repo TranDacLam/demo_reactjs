@@ -21,8 +21,9 @@ const MenuLink = ({label, to, activeOnlyWhenExact}) => {
 
 class Header extends Component {
     render() {
+        var { total_quantity } = this.props;
         return (
-            <nav className="navbar navbar-default" role="navigation">
+            <nav className="navbar navbar-default">
                 <div className="container">
                     <div className="navbar-header">
                         <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -41,8 +42,8 @@ class Header extends Component {
                             <MenuLink label="Giới thiệu" to="/about" activeOnlyWhenExact={false} />
                             <MenuLink label="Liên hệ" to="/contact" activeOnlyWhenExact={false} />
                         </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><Link to="/checkout"><i className="fa fa-shopping-cart"></i> Giỏ hàng</Link></li>
+                        <ul className="nav navbar-nav navbar-right">
+                            <li><Link to="/checkout">({total_quantity > 0 ? `${total_quantity} sản phẩm` : 'Trống'})<i className="fa fa-shopping-cart"></i> Giỏ hàng</Link></li>
                         </ul>
                     </div>
                 </div>

@@ -52,7 +52,6 @@ class CartContainer extends Component {
 CartContainer.propTypes = {
     cart: PropTypes.arrayOf(PropTypes.shape({
         product: PropTypes.shape({
-            id: PropTypes.number.isRequired,
             name: PropTypes.string.isRequired,
             price: PropTypes.number.isRequired,
             image: PropTypes.string.isRequired,

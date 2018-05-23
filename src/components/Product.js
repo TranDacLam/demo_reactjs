@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as msg from './../constants/Message';
+import { Link } from 'react-router-dom';
 
 class Product extends Component {
 
@@ -17,7 +17,6 @@ class Product extends Component {
 
     onAddToCard = (product) => {
         this.props.onAddToCard(product);
-        this.props.onChangeMessage(msg.MSG_ADD_TO_CART_SUCCESS);
     }
 
     render() {
@@ -36,7 +35,10 @@ class Product extends Component {
                         <p>
                             <a className="btn btn-primary" onClick={ () => this.onAddToCard(product)}>
                                 <i className="fa fa-shopping-cart"></i> Add to cart
-                            </a>
+                            </a> &ensp;
+                            <Link className="btn btn-success" to={`/product/${product.id}`} >
+                                Xem chi tiết <i className="fa fa-arrow-right"></i>
+                            </Link>
                         </p>
                     </div>
                 </div>

@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Products from './../components/Products';
-import Product from './../components/Product';
+import Products from './../../components/Products';
+import Product from './../../components/Product';
 import PropTypes from 'prop-types';
-import { actAddToCart, actChangeMessage } from './../actions/index';
+import { actAddToCart } from './../../actions/index';
+import { getProductsService } from './../../services/ProductService';
 
 class ProductsContainer extends Component {
+
+    componentDidMount() {
+        this.props.fetchAllProducts();
+    }
+
     render() {
         var { products } = this.props;
         return (
@@ -17,14 +23,13 @@ class ProductsContainer extends Component {
 
     showProducts(products){
         var result = null;
-        var { onAddToCard, onChangeMessage } = this.props;
+        var { onAddToCard } = this.props;
         if(products.length > 0){
             result = products.map((product, index) => {
                 return <Product 
                     key={index} 
                     product={product} 
                     onAddToCard={onAddToCard}
-                    onChangeMessage={onChangeMessage}
                 />;
             })
         }
@@ -35,7 +40,6 @@ class ProductsContainer extends Component {
 ProductsContainer.propTypes = {
     products: PropTypes.arrayOf(
         PropTypes.shape({
-            id: PropTypes.number.isRequired,
             name: PropTypes.string.isRequired,
             price: PropTypes.number.isRequired,
             image: PropTypes.string.isRequired,
@@ -44,8 +48,7 @@ ProductsContainer.propTypes = {
             rating: PropTypes.number.isRequired
         })
     ).isRequired,
-    onAddToCard: PropTypes.func.isRequired,
-    onChangeMessage: PropTypes.func.isRequired
+    onAddToCard: PropTypes.func.isRequired
 };
 
 const mapStatetoProps = state => {
@@ -59,8 +62,8 @@ const mapDispatchToProps = (dispatch, props) => {
         onAddToCard: (product) => {
             dispatch(actAddToCart(product, 1));
         },
-        onChangeMessage: (message) => {
-            dispatch(actChangeMessage(message))
+        fetchAllProducts: () => {
+            dispatch(getProductsService());
         }
     }
 }

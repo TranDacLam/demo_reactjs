@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as msg from './../constants/Message';
 
 class CartItem extends Component {
     render() {
@@ -34,12 +33,12 @@ class CartItem extends Component {
         }else{
             this.props.onSubCartItem(product);
         }
-        this.props.onChangeMessage(msg.MSG_UPDATE_CART_SUCCESS);
     }
 
     onDelCartItem = (product) => {
-        this.props.onDelCartItem(product);
-        this.props.onChangeMessage(msg.MSG_DELETE_PRODUCT_IN_CART_SUCCESS);
+        if(confirm('Bạn chắc chắn muốn xóa?')){ //eslint-disable-line
+            this.props.onDelCartItem(product);
+        }
     }
 
     subTotal(price, quantity){

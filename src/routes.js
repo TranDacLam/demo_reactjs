@@ -1,41 +1,47 @@
-import React, { Component } from 'react';
-import Home from './components/Home';
-import About from './components/About';
-import Contact from './components/Contact';
-import Checkout from './components/Checkout';
-import NotFound from './components/NotFound';
-import ProductsContainer from './containers/ProductsContainer';
+import React from 'react';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import CartPage from './pages/CartPage';
+import NotFoundPage from './pages/NotFoundPage';
+import ProductListPage from './pages/ProductListPage';
+import ProductDetailPage from './pages/ProductDetailPage';
 
 const routes = [
     {
         path: '/',
         exact: true,
-        main: () => <Home />
+        main: () => <HomePage />
     },
     {
         path: '/about',
         exact: false,
-        main: () => <About />
+        main: () => <AboutPage />
     },
     {
         path: '/contact',
         exact: false,
-        main: () => <Contact />
+        main: () => <ContactPage />
     },
     {
         path: '/checkout',
         exact: false,
-        main: () => <Checkout />
+        main: () => <CartPage />
     },
     {
         path: '/products',
         exact: false,
-        main: () => <ProductsContainer />
+        main: () => <ProductListPage />
+    },
+    {
+        path: '/product/:id',
+        exact: false,
+        main: ({match}) => <ProductDetailPage match={match} />
     },
     {
         path: '',
         exact: false,
-        main: () => <NotFound />
+        main: () => <NotFoundPage />
     }
 ];
 
