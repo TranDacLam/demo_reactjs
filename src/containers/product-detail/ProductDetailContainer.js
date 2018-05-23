@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getProductDetail } from './../../services/ProductService';
+import ProductDetail from './../../components/ProductDetail';
+import { actAddToCart } from './../../actions/index';
 
 class ProductDetailContainer extends Component {
 
@@ -11,19 +13,9 @@ class ProductDetailContainer extends Component {
     }
 
     render() {
-        var { product_detail } = this.props;
+        var { product_detail, onAddToCard } = this.props;
         return (
-            <div className="row">
-                <h1>Sản Phẩm</h1><br/><br/><br/>
-                <div className="col-xs-6 col-sm-6">
-                    <img src={product_detail.image} alt={product_detail.name}/>
-                </div>
-                <div className="col-xs-6 col-sm-6">
-                    <h3>{product_detail.name}</h3>
-                    <ul className="rating">{this.showRatings(product_detail.rating)}</ul>
-                    <p>{product_detail.des}</p>
-                </div>
-            </div> 
+            <ProductDetail product_detail={product_detail} onAddToCard={onAddToCard}/>
         );
     }
 
@@ -49,7 +41,8 @@ ProductDetailContainer.propTypes = {
         inventory: PropTypes.number,
         rating: PropTypes.number
     }),
-    fetchProductDetail: PropTypes.func.isRequired
+    fetchProductDetail: PropTypes.func.isRequired,
+    onAddToCard: PropTypes.func.isRequired
 };
 
 const mapStatetoProps = state => {
@@ -62,6 +55,9 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         fetchProductDetail: (product_id) => {
             dispatch(getProductDetail(product_id));
+        },
+        onAddToCard: (product) => {
+            dispatch(actAddToCart(product, 1));
         }
     }
 }
