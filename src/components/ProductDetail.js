@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+declare var toastr: any; // declare Jquery
+
 class ProductDetail extends Component {
     render() {
         var { product_detail } = this.props;
@@ -12,11 +14,12 @@ class ProductDetail extends Component {
                 <div className="col-xs-6 col-sm-6">
                     <h3>{product_detail.name}</h3>
                     <ul className="rating">{this.showRatings(product_detail.rating)}</ul>
-                    <p>{product_detail.des}</p>
+                    <p>Mô tả: {product_detail.des}</p>
+                    <p>Tồn kho: {product_detail.inventory}</p>
                     <p>
-                        <a className="btn btn-primary" onClick={ () => this.onAddToCard(product_detail)}>
+                        <button className="btn btn-primary" onClick={ () => this.onAddToCard(product_detail)}>
                             <i className="fa fa-shopping-cart"></i> Add to cart
-                        </a>
+                        </button>
                     </p>
                 </div>
             </div> 
@@ -37,6 +40,7 @@ class ProductDetail extends Component {
 
     onAddToCard = (product) => {
         this.props.onAddToCard(product);
+        toastr.success('Thêm sản phẩm vào giỏ hàng thành công');
     }
 }
 

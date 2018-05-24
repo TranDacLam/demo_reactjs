@@ -20,6 +20,14 @@ const MenuLink = ({label, to, activeOnlyWhenExact}) => {
 }
 
 class Header extends Component {
+
+    componentDidMount(){
+        $('.nav li').click(function(){
+            $('.nav li').removeClass('active');
+            $(this).addClass('active');
+        });
+    }
+
     render() {
         var { total_quantity } = this.props;
         return (
@@ -43,7 +51,7 @@ class Header extends Component {
                             <MenuLink label="Liên hệ" to="/contact" activeOnlyWhenExact={false} />
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
-                            <li><Link to="/checkout">({total_quantity > 0 ? `${total_quantity} sản phẩm` : 'Trống'})<i className="fa fa-shopping-cart"></i> Giỏ hàng</Link></li>
+                            <li><Link to="/cart">({total_quantity > 0 ? `${total_quantity} sản phẩm` : 'Trống'})<i className="fa fa-shopping-cart"></i> Giỏ hàng</Link></li>
                         </ul>
                     </div>
                 </div>

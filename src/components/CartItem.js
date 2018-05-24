@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+declare var toastr: any; // declare Jquery
+
 class CartItem extends Component {
     render() {
         var { cart_item } = this.props;
@@ -10,11 +12,11 @@ class CartItem extends Component {
                 <td>{cart_item.product.price}$</td>
                 <td className="btn-group">
                     <button type="button" className="btn btn-danger"
-                        onClick={ () => this.onQuantityCartItem(cart_item.product, 'sub')}
+                        onClick={ () => this.onQuantityCartItem(cart_item.product, cart_item.quantity, 'sub')}
                     > - </button>
                     <button className="btn btn-primary">{cart_item.quantity}</button>
                     <button type="button" className="btn btn-danger"
-                        onClick={ () => this.onQuantityCartItem(cart_item.product, 'plus')}
+                        onClick={ () => this.onQuantityCartItem(cart_item.product, cart_item.quantity, 'plus')}
                     > + </button>
                 </td>
                 <td>{this.subTotal(cart_item.product.price, cart_item.quantity)}$</td>
@@ -27,11 +29,22 @@ class CartItem extends Component {
         );
     }
 
-    onQuantityCartItem = (product, status) => {
+    onQuantityCartItem = (product, quantity, status) => {
         if(status === 'plus'){
-            this.props.onPlusCartItem(product);
+            if(quantity < product.inventory){
+                this.props.onPlusCartItem(product);
+                toastr.success('Cập nhấp giỏ hàng thành công');
+            }else{
+                toastr.warning('Vui lòng nhập số sản phẩm mua nhỏ hơn số sản phẩm tồn kho!');
+            }
         }else{
-            this.props.onSubCartItem(product);
+            if(quantity > 1){
+                this.props.onSubCartItem(product);
+                toastr.success('Cập nhấp giỏ hàng thành công');
+            }else{
+                this.onDelCartItem(product);
+                toastr.success('Xóa giỏ hàng thành công');
+            }
         }
     }
 

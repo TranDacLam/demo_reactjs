@@ -24,7 +24,7 @@ const routes = [
         main: () => <ContactPage />
     },
     {
-        path: '/checkout',
+        path: '/cart',
         exact: false,
         main: () => <CartPage />
     },

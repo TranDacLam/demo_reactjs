@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+declare var toastr: any; // declare Jquery
+
 class Product extends Component {
 
     showRatings(rating){
@@ -17,6 +19,7 @@ class Product extends Component {
 
     onAddToCard = (product) => {
         this.props.onAddToCard(product);
+        toastr.success('Thêm sản phẩm vào giỏ hàng thành công');
     }
 
     render() {

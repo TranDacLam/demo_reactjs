@@ -18,18 +18,6 @@ class ProductDetailContainer extends Component {
             <ProductDetail product_detail={product_detail} onAddToCard={onAddToCard}/>
         );
     }
-
-    showRatings(rating){
-        var result = [];
-        for(let i=0; i < 5; i++){
-            if(i < rating){
-                result.push(<li key={i}><i className="fa fa-star"></i></li>);
-            }else{
-                result.push(<li key={i}><i className="fa fa-star-o"></i></li>);
-            }
-        }
-        return result;
-    }
 }
 
 ProductDetailContainer.propTypes = {
